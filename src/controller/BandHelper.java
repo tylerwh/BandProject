@@ -47,7 +47,7 @@ public class BandHelper {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		TypedQuery<Band> typedQuery	= em.createQuery(
-				"select b from Band li	where b.bandName	= :selectedBand", Band.class);
+				"select b from Band b	where b.bandName = :selectedBand", Band.class);
 		typedQuery.setParameter("selectedBand", bandName);
 		List<Band> foundItems = typedQuery.getResultList();
 		em.close();
@@ -58,8 +58,7 @@ public class BandHelper {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		TypedQuery<Band>typedQuery = em.createQuery(
-				"select li from ListItem li	where li.title = "
-				+ ":selectedTitle and li.author = :selectedAuthor", Band.class);
+				"select b from Band b	where b.bandName = :selectedBand", Band.class);
 		//Substitute parameter with	actual data	from the toDelete item
 		typedQuery.setParameter("selectedBand", toDelete.getBandName());
 		//we only want one result
