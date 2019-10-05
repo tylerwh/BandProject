@@ -1,8 +1,11 @@
 package controller;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import model.Band;
 
@@ -30,11 +33,41 @@ public class BandHelper {
 		return found;
 	}
 	
-	public void updateItem(Band toEdit) {
+	public void updateBand(Band toEdit) {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		em.merge(toEdit);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public List<Band> searchForBandByName(String bandName) {
+		// TODO Auto-generated method stub
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Band> typedQuery	= em.createQuery(
+				"select li from ListItem li	where li.title	= :selectedTitle", Band.class);
+		typedQuery.setParameter("selectedTitle", bandName);
+		List<Band> foundItems = typedQuery.getResultList();
+		em.close();
+		return	foundItems;
+	}
+	
+	public void deleteBand(Band toDelete) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Band>typedQuery = em.createQuery(
+				"select li from ListItem li	where li.title = "
+				+ ":selectedTitle and li.author = :selectedAuthor", Band.class);
+		//Substitute parameter with	actual data	from the toDelete item
+		typedQuery.setParameter("selectedBand", toDelete.getBandName());
+		//we only want one result
+		typedQuery.setMaxResults(1);
+		//get the result and save it into a	new	list item
+		Band result	= typedQuery.getSingleResult();
+		//remove it
+		em.remove(result);
 		em.getTransaction().commit();
 		em.close();
 	}
