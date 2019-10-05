@@ -47,8 +47,8 @@ public class BandHelper {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		TypedQuery<Band> typedQuery	= em.createQuery(
-				"select li from ListItem li	where li.title	= :selectedTitle", Band.class);
-		typedQuery.setParameter("selectedTitle", bandName);
+				"select b from Band li	where b.bandName	= :selectedBand", Band.class);
+		typedQuery.setParameter("selectedBand", bandName);
 		List<Band> foundItems = typedQuery.getResultList();
 		em.close();
 		return	foundItems;
