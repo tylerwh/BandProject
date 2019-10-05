@@ -9,7 +9,7 @@ import model.Album;
 public class AlbumHelper {
 	static EntityManagerFactory	emfactory = Persistence.createEntityManagerFactory("BandProject");
 
-	public void insertBand(Album a) {
+	public void insertAlbum(Album a) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(a);
@@ -21,7 +21,7 @@ public class AlbumHelper {
 		emfactory.close();
 	}
 	
-	public Album searchForBandByID(int idToEdit) {
+	public Album searchForAlbumByID(int idToEdit) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		Album found = em.find(Album.class,  idToEdit);
@@ -29,7 +29,7 @@ public class AlbumHelper {
 		return found;
 	}
 	
-	public void updateItem(Album toEdit) {
+	public void updateAlbum(Album toEdit) {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
