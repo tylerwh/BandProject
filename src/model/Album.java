@@ -21,8 +21,7 @@ public class Album {
 	private String albumName;
 	@Column(name="RELEASE_DATE")
 	private LocalDate releaseDate;
-	/*@ManyToOne
-	@JoinColumn(name="BAND_ID")*/
+	@Column(name="BAND_ID")
 	private int bandId;
 	
 	public Album() {
