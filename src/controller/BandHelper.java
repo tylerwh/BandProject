@@ -21,6 +21,12 @@ public class BandHelper {
 		em.close();
 	}
 	
+	public List<Band> showAllBands() {
+		EntityManager em = emfactory.createEntityManager();
+		List<Band> allItems = em.createQuery("SELECT b FROM Band b").getResultList();
+		return allItems;
+	}
+	
 	public void cleanUp() {
 		emfactory.close();
 	}

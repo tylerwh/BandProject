@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,6 +17,12 @@ public class AlbumHelper {
 		em.persist(a);
 		em.getTransaction().commit();
 		em.close();
+	}
+	
+	public List<Album> showAllAlbums() {
+		EntityManager em = emfactory.createEntityManager();
+		List<Album> allItems = em.createQuery("SELECT a FROM Album a").getResultList();
+		return allItems;
 	}
 	
 	public void cleanUp() {
