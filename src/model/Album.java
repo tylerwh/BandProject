@@ -29,6 +29,12 @@ public class Album {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Album(String albumName, LocalDate releaseDate) {
+		super();
+		this.albumName = albumName;
+		this.releaseDate = releaseDate;
+	}
+	
 	public Album(String albumName, LocalDate releaseDate, int bandId) {
 		super();
 		this.albumName = albumName;
