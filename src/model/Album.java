@@ -1,12 +1,28 @@
 package model;
 
 import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="album")
 public class Album {
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ALBUM_ID")
 	private int albumId;
+	@Column(name="ALBUM_NAME")
 	private String albumName;
+	@Column(name="RELEASE_DATE")
 	private LocalDate releaseDate;
+	@ManyToOne
+	@JoinColumn(name="BAND_ID")
 	private int bandId;
 	
 	public Album() {
@@ -14,6 +30,12 @@ public class Album {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Album(String albumName, LocalDate releaseDate) {
+		super();
+		this.albumName = albumName;
+		this.releaseDate = releaseDate;
+	}
+	
 	public Album(String albumName, LocalDate releaseDate, int bandId) {
 		super();
 		this.albumName = albumName;
