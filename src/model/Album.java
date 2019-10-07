@@ -2,12 +2,25 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="album")
 public class Album {
 	
+	@Id
+	@GeneratedValue
 	private int albumId;
+	@Column
 	private String albumName;
+	@Column
 	private LocalDate releaseDate;
-	private int bandId;
+	@Column
+	private int bandId; // Do we need this if we do the relational mapping from JPA?
 	
 	public Album() {
 		super();
