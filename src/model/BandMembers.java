@@ -18,7 +18,8 @@ public class BandMembers {
 	private int memberId;
 	@Column(name="MEMBER_NAME")
 	private String memberName;
-	@Column(name="BAND_ID")
+	@ManyToOne
+	@JoinColumn(name="BAND_ID")
 	private int bandId;
 	@Column(name="MEMBER_ROLE")
 	private String memberRole;
