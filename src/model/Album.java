@@ -23,13 +23,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="album")
 public class Album {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-=======
-@Entity
-@Table(name="album")
-public class Album {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ALBUM_ID")
