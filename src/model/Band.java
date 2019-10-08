@@ -1,10 +1,15 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,7 +17,14 @@ import javax.persistence.Table;
 public class Band {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="BAND_ID")
+	@ManyToMany(fetch = FetchType.EAGER,
+	cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE
+	})
+@JoinTable(name = "band_members",
+	joinColumns = { @JoinColumn(name = "BAND_ID")},
+	inverseJoinColumns = { @JoinColumn(name = "BAND_ID")})
 	private int bandId;
 	@Column(name="BAND_NAME")
 	private String bandName;
