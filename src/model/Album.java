@@ -2,10 +2,14 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,14 +17,16 @@ import javax.persistence.Table;
 public class Album {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ALBUM_ID")
 	private int albumId;
-	@Column
+	@Column(name="ALBUM_NAME")
 	private String albumName;
-	@Column
+	@Column(name="RELEASE_DATE")
 	private LocalDate releaseDate;
-	@Column
-	private int bandId; // Do we need this if we do the relational mapping from JPA?
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="band_fk")
+	private int bandId;
 	
 	public Album() {
 		super();

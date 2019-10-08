@@ -1,10 +1,25 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="band_members")
 public class BandMembers {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="MEMBER_ID")
 	private int memberId;
+	@Column(name="MEMBER_NAME")
 	private String memberName;
+	@Column(name="BAND_ID")
 	private int bandId;
+	@Column(name="MEMBER_ROLE")
 	private String memberRole;
 	
 	public BandMembers() {
