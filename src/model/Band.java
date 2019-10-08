@@ -9,16 +9,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="band")
 public class Band {
-	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="BAND_ID")
 	private int bandId;
-	@Column
+	@Column(name="BAND_NAME")
 	private String bandName;
 	// Should we have an instance of the Album class to address the OneToMany relationship?
 	@OneToMany(cascade = CascadeType.PERSIST) 
@@ -28,6 +29,12 @@ public class Band {
 	public Band() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Band(int bandId, String bandName) {
+		super();
+		this.bandId = bandId;
+		this.bandName = bandName;
 	}
 
 	public Band(String bandName) {
