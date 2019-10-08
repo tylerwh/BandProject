@@ -12,6 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="band_members")
 public class BandMembers {
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="MEMBER_ID")
