@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -46,6 +45,8 @@ public class Band {
 	public Band(String bandName) {
 		super();
 		this.bandName = bandName;
+		this.bandId = this.getBandId(); // I think we need to invoke the bandId in order for this to persist for 
+										// foreign key purposes regarding Album and BandMembers 
 	}
 
 	/**

@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,11 +20,13 @@ public class BandMembers {
 	private int memberId;
 	@Column(name="MEMBER_NAME")
 	private String memberName;
-	@ManyToOne
-	@JoinColumn(name="BAND_ID")
+	@Column(name="BAND_ID")
 	private int bandId;
 	@Column(name="MEMBER_ROLE")
 	private String memberRole;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="BAND_ID", insertable = false, updatable = false)
+	private Band band;
 	
 	public BandMembers() {
 		super();
