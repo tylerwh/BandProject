@@ -18,7 +18,7 @@ public class BandMembers {
 	private int memberId;
 	@Column(name="MEMBER_NAME")
 	private String memberName;
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "band")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "band", targetEntity = Band.class)
 	private int bandId;
 	@Column(name="MEMBER_ROLE")
 	private String memberRole;

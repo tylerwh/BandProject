@@ -3,10 +3,12 @@ package model;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -21,8 +23,7 @@ public class Album {
 	private String albumName;
 	@Column(name="RELEASE_DATE")
 	private LocalDate releaseDate;
-	@ManyToOne
-	@JoinColumn(name="BAND_ID")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "band", targetEntity = Band.class)
 	private int bandId;
 	
 	public Album() {
