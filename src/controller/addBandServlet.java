@@ -33,6 +33,7 @@ public class addBandServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("Made it to servlet");
 		String band = request.getParameter("band");
 		
 		String bandMember = request.getParameter("band member");
@@ -42,6 +43,8 @@ public class addBandServlet extends HttpServlet {
 		String albumYear = request.getParameter("release year");
 		String albumMonth = request.getParameter("release month");
 		String albumDay = request.getParameter("release day");
+		
+		System.out.println("Retrieved parameters from index.html");
 		
 		LocalDate ld;
 		try {
@@ -54,15 +57,21 @@ public class addBandServlet extends HttpServlet {
 		BandHelper bh = new BandHelper();
 		bh.insertBand(b);
 		
+		System.out.println("New band created");
+		
 		BandMembers bm = new BandMembers(bandMember, bandMemberRole);
 		bm.setBandId(b.getBandId());
 		BandMembersHelper bmh = new BandMembersHelper();
 		bmh.insertBandMember(bm);
 		
+		System.out.println("New bandmembers created");
+		
 		Album a = new Album(album, ld);
 		a.setBandId(b.getBandId());
 		AlbumHelper ah = new AlbumHelper();
 		ah.insertAlbum(a);
+		
+		System.out.println("New album created");
 		
 		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 	}
