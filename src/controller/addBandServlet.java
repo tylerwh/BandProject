@@ -55,10 +55,12 @@ public class addBandServlet extends HttpServlet {
 		bh.insertBand(b);
 		
 		BandMembers bm = new BandMembers(bandMember, bandMemberRole);
+		bm.setBandId(b.getBandId());
 		BandMembersHelper bmh = new BandMembersHelper();
 		bmh.insertBandMember(bm);
 		
 		Album a = new Album(album, ld);
+		a.setBandId(b.getBandId());
 		AlbumHelper ah = new AlbumHelper();
 		ah.insertAlbum(a);
 		
