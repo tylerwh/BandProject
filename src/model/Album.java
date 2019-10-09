@@ -3,7 +3,6 @@ package model;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,8 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import javax.persistence.CascadeType;
-
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="album")
@@ -26,11 +31,9 @@ public class Album {
 	private String albumName;
 	@Column(name="RELEASE_DATE")
 	private LocalDate releaseDate;
-	@Column(name="BAND_ID")
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="band_fk")
 	private int bandId;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="BAND_ID", insertable = false, updatable = false)
-	private Band band;
 	
 	public Album() {
 		super();
