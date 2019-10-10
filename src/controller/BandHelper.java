@@ -23,7 +23,14 @@ public class BandHelper {
 	
 	public List<Band> showAllBands() {
 		EntityManager em = emfactory.createEntityManager();
-		List<Band> allItems = em.createQuery("SELECT b FROM Band b").getResultList();
+		List<Band> allItems = em.createNamedQuery("Band.findBands", Band.class).getResultList();
+		
+		//Testing to see if @NamedQuery worked for get list of bands
+		for (Band b: allItems) {
+			System.out.println(b.getBandId());
+			System.out.println(b.getBandName());
+		}
+		
 		return allItems;
 	}
 	

@@ -29,7 +29,11 @@ public class viewAllAlbumsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		AlbumHelper bh = new AlbumHelper();
 		
+		System.out.println("In the viewAllAlbumsServlet");
+		
 		request.setAttribute("allAlbums", bh.showAllAlbums());
+		
+		System.out.println("Set attribute for allAlbums");
 		
 		if(bh.showAllAlbums().isEmpty()){
 			request.setAttribute("allAlbums", " ");
