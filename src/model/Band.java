@@ -10,12 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="band")
+@NamedQuery(name="Band.findBands", query="select b from Band b")
 public class Band {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
