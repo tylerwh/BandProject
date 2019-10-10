@@ -17,7 +17,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="band")
-@NamedQuery(name="Band.findBands", query="select b from Band b")
 public class Band {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

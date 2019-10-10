@@ -59,15 +59,17 @@ public class addBandServlet extends HttpServlet {
 		
 		System.out.println("New band created");
 		
-		BandMembers bm = new BandMembers(bandMember, bandMemberRole);
-		bm.setBandId(b.getBandId());
+		//Get the band that has been persisted so we can make sure they are being persisted
+		Band savedBand = bh.searchForOneBandByName(band);
+		System.out.println(savedBand.toString());
+		
+		BandMembers bm = new BandMembers(bandMember, bandMemberRole, savedBand);
 		BandMembersHelper bmh = new BandMembersHelper();
 		bmh.insertBandMember(bm);
 		
 		System.out.println("New bandmembers created");
 		
-		Album a = new Album(album, ld);
-		a.setBandId(b.getBandId());
+		Album a = new Album(album, ld, savedBand);
 		AlbumHelper ah = new AlbumHelper();
 		ah.insertAlbum(a);
 		

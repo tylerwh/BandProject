@@ -23,8 +23,8 @@ public class BandHelper {
 	
 	public List<Band> showAllBands() {
 		EntityManager em = emfactory.createEntityManager();
-		List<Band> allItems = em.createNamedQuery("Band.findBands", Band.class).getResultList();
-		
+		//List<Band> allItems = em.createNamedQuery("Band.findBands", Band.class).getResultList();
+		List<Band> allItems = em.createQuery("SELECT b FROM Band b").getResultList();
 		//Testing to see if @NamedQuery worked for get list of bands
 		for (Band b: allItems) {
 			System.out.println(b.getBandId());
@@ -65,6 +65,18 @@ public class BandHelper {
 		List<Band> foundItems = typedQuery.getResultList();
 		em.close();
 		return	foundItems;
+	}
+	
+	public Band searchForOneBandByName(String bandName) {
+		// TODO Auto-generated method stub
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Band> typedQuery	= em.createQuery(
+				"select b from Band b where b.bandName = :selectedBand", Band.class);
+		typedQuery.setParameter("selectedBand", bandName);
+		Band foundBand = typedQuery.getSingleResult();
+		em.close();
+		return	foundBand;
 	}
 	
 	public void deleteBand(Band toDelete) {

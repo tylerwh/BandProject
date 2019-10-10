@@ -12,7 +12,7 @@
 	<table>
 		<c:forEach items="${requestScope.allBands}" var="currentBand">
 		<tr>
-		 <td><input type="radio" name="id" value="${currentBand.id}"></td>
+		 <td><input type="radio" name="id" value="${currentBand.bandId}"></td>
 		 <td>${currentBand.bandName}</td>
 		 </tr>
 		</c:forEach>

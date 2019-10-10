@@ -1,6 +1,8 @@
 package model;
 
 import java.time.LocalDate;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,10 +24,8 @@ public class Album {
 	private String albumName;
 	@Column(name="RELEASE_DATE")
 	private LocalDate releaseDate;
-	@Column(name="BAND_ID")
-	private int bandId;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="BAND_ID", insertable = false, updatable = false)
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="BAND_ID")
 	private Band band;
 	
 	public Album() {
@@ -33,18 +33,13 @@ public class Album {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Album(String albumName, LocalDate releaseDate) {
+	public Album(String albumName, LocalDate releaseDate, Band b) {
 		super();
 		this.albumName = albumName;
 		this.releaseDate = releaseDate;
+		this.band = b;
 	}
 	
-	public Album(String albumName, LocalDate releaseDate, int bandId) {
-		super();
-		this.albumName = albumName;
-		this.releaseDate = releaseDate;
-		this.bandId = bandId;
-	}
 
 	/**
 	 * @return the albumId
@@ -88,24 +83,10 @@ public class Album {
 		this.releaseDate = releaseDate;
 	}
 
-	/**
-	 * @return the bandId
-	 */
-	public int getBandId() {
-		return bandId;
-	}
-
-	/**
-	 * @param bandId the bandId to set
-	 */
-	public void setBandId(int bandId) {
-		this.bandId = bandId;
-	}
 
 	@Override
 	public String toString() {
-		return "Album [albumId=" + albumId + ", albumName=" + albumName + ", releaseDate=" + releaseDate + ", bandId="
-				+ bandId + "]";
+		return "Album [albumId=" + albumId + ", albumName=" + albumName + ", releaseDate=" + releaseDate + "]";
 	}
 
 }
