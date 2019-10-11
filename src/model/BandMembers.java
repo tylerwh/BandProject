@@ -20,12 +20,10 @@ public class BandMembers {
 	private int memberId;
 	@Column(name="MEMBER_NAME")
 	private String memberName;
-	@Column(name="BAND_ID")
-	private int bandId;
 	@Column(name="MEMBER_ROLE")
 	private String memberRole;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="BAND_ID", insertable = false, updatable = false)
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="BAND_ID")
 	private Band band;
 	
 	public BandMembers() {
@@ -33,25 +31,19 @@ public class BandMembers {
 		// TODO Auto-generated constructor stub
 	}	
 
-	public BandMembers(int memberId, String memberName, int bandId, String memberRole) {
+	public BandMembers(int memberId, String memberName, String memberRole) {
 		super();
 		this.memberId = memberId;
 		this.memberName = memberName;
-		this.bandId = bandId;
 		this.memberRole = memberRole;
 	}
 
-	public BandMembers(String memberName, int bandId, String memberRole) {
-		super();
-		this.memberName = memberName;
-		this.bandId = bandId;
-		this.memberRole = memberRole;
-	}
 
-	public BandMembers(String memberName, String memberRole) {
+	public BandMembers(String memberName, String memberRole, Band b) {
 		super();
 		this.memberName = memberName;
 		this.memberRole = memberRole;
+		this.band = b;
 	}
 	
 	/**
@@ -83,20 +75,6 @@ public class BandMembers {
 	}
 
 	/**
-	 * @return the bandId
-	 */
-	public int getBandId() {
-		return bandId;
-	}
-
-	/**
-	 * @param bandId the bandId to set
-	 */
-	public void setBandId(int bandId) {
-		this.bandId = bandId;
-	}
-
-	/**
 	 * @return the memberRole
 	 */
 	public String getMemberRole() {
@@ -112,8 +90,7 @@ public class BandMembers {
 
 	@Override
 	public String toString() {
-		return "BandMembers [memberId=" + memberId + ", memberName=" + memberName + ", bandId=" + bandId
-				+ ", memberRole=" + memberRole + "]";
+		return "BandMembers [memberId=" + memberId + ", memberName=" + memberName + ", memberRole=" + memberRole + "]";
 	}
 	
 	

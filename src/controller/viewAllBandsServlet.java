@@ -31,6 +31,8 @@ public class viewAllBandsServlet extends HttpServlet {
 		
 		request.setAttribute("allBands", bh.showAllBands());
 		
+		
+		
 		if(bh.showAllBands().isEmpty()){
 			request.setAttribute("allBands", " ");
 		}
