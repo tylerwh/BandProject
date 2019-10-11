@@ -14,7 +14,6 @@
 		<tr>
 		 <td><input type="radio" name="id" value="${currentAlbum.albumId}"></td>
 		 <td>${currentAlbum.albumName}</td>
-		 <td>${currentAlbum.bandName}</td>
 		 </tr>
 		</c:forEach>
 	</table>
