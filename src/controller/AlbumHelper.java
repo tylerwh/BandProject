@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import model.Album;
+import model.Band;
 
 public class AlbumHelper {
 	static EntityManagerFactory	emfactory = Persistence.createEntityManagerFactory("BandProject");
@@ -21,8 +22,25 @@ public class AlbumHelper {
 	
 	public List<Album> showAllAlbums() {
 		EntityManager em = emfactory.createEntityManager();
-//		List<Album> allItems = em.createQuery("SELECT a FROM Album a").getResultList();
-		List<Album> allItems = em.createQuery("SELECT a, b FROM Album a, Band b").getResultList();
+		List<Album> allItems = em.createQuery("SELECT a FROM Album a").getResultList();
+		
+		// The below list was an attempt to join tables without an annotated entity in model package,
+		// but after trying to figure out how to access all of the attributes, I have realized there is 
+		// not time to continue this. Will leave it basic for now.
+//		List<Album> allItems = em.createQuery("SELECT a, b FROM Album a, Band b").getResultList();
+		
+		// The below is to test and see the list in console
+		System.out.println("Query works");
+		System.out.println(allItems);
+		
+		for (Album b: allItems) {
+			System.out.println("     -----     ");
+			System.out.println(b.getAlbumId());
+			System.out.println(b.getAlbumName());
+			System.out.println(b.toString());
+			System.out.println("---------------");
+		}
+		
 		return allItems;
 	}
 	
