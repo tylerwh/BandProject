@@ -39,7 +39,7 @@ public class viewAllAlbumsServlet extends HttpServlet {
 			request.setAttribute("allAlbums", " ");
 		}
 		
-		getServletContext().getRequestDispatcher("/album-list.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/view-albums.jsp").forward(request, response);
 	}
 
 	/**

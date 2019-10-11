@@ -21,7 +21,8 @@ public class AlbumHelper {
 	
 	public List<Album> showAllAlbums() {
 		EntityManager em = emfactory.createEntityManager();
-		List<Album> allItems = em.createQuery("SELECT a FROM Album a").getResultList();
+//		List<Album> allItems = em.createQuery("SELECT a FROM Album a").getResultList();
+		List<Album> allItems = em.createQuery("SELECT a, b FROM Album a, Band b").getResultList();
 		return allItems;
 	}
 	
