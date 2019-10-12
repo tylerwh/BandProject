@@ -29,10 +29,10 @@ public class viewAllBandMembersServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		BandMembersHelper bh = new BandMembersHelper();
 		
-		request.setAttribute("allBands", bh.showAllBandMemberss());
+		request.setAttribute("allMembers", bh.showAllBandMemberss());
 		
 		if(bh.showAllBandMemberss().isEmpty()){
-			request.setAttribute("allBands", " ");
+			request.setAttribute("allMembers", " ");
 		}
 		
 		getServletContext().getRequestDispatcher("/band-members-list.jsp").forward(request, response);
