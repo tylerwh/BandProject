@@ -8,7 +8,7 @@
 <title>View All Albums</title>
 </head>
 <body>
-	<form method = "post" action = "navigationServlet">
+	<form method = "post" action = "AlbumNavigationServlet">
 	<table>
 		<c:forEach items="${requestScope.allAlbums}" var="currentAlbum">
 		<tr>
