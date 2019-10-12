@@ -8,7 +8,7 @@
 <title>Band Members List</title>
 </head>
 <body>
-	<form method = "post" action = "navigationServlet">
+	<form method = "post" action = "MemberNavigationServlet">
 	<table>
 		<c:forEach items="${requestScope.allMembers}" var="currentMember">
 		<tr>

@@ -8,7 +8,7 @@
 <title>List of Bands</title>
 </head>
 <body>
-<form method = "post" action = "navigationServlet">
+<form method = "post" action = "BandNavigationServlet">
 	<table>
 		<c:forEach items="${requestScope.allBands}" var="currentBand">
 		<tr>
