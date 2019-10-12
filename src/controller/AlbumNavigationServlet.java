@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Album;
+import model.Band;
+
 /**
  * Servlet implementation class AlbumNavigationServlet
  */
@@ -46,6 +49,15 @@ public class AlbumNavigationServlet extends HttpServlet {
 			
 			
 		} else if (process.equals("delete")) {
+			try {
+				Integer tempId = Integer.parseInt(request.getParameter("id"));
+				Album albumToDelete = ah.searchForAlbumByID(tempId);
+				ah.deleteAlbum(albumToDelete);
+			} catch (NumberFormatException e) {
+				System.out.println("Forgot to click a button");
+			} finally {
+				getServletContext().getRequestDispatcher("/viewAllAlbumsServlet").forward(request, response);
+			}
 			
 		} else if (process.equals("add")) {
 			getServletContext().getRequestDispatcher("/index.html").forward(request, response);

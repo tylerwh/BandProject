@@ -5,9 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import model.Album;
-import model.Band;
 
 public class AlbumHelper {
 	static EntityManagerFactory	emfactory = Persistence.createEntityManagerFactory("BandProject");
@@ -54,6 +54,24 @@ public class AlbumHelper {
 		Album found = em.find(Album.class,  idToEdit);
 		em.close();
 		return found;
+	}
+	
+	public void deleteAlbum(Album toDelete) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Album>typedQuery = em.createQuery(
+				"select a from Album a where a.albumName = :selectedAlbum", Album.class);
+		//Substitute parameter with	actual data	from the toDelete item
+		typedQuery.setParameter("selectedAlbum", toDelete.getAlbumName());
+		
+		//we only want one result
+		typedQuery.setMaxResults(1);
+		//get the result and save it into a	new	list item
+		Album result = typedQuery.getSingleResult();
+		//remove it
+		em.remove(result);
+		em.getTransaction().commit();
+		em.close();
 	}
 	
 	public void updateAlbum(Album toEdit) {

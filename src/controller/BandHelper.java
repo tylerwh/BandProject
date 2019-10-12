@@ -86,6 +86,13 @@ public class BandHelper {
 				"select b from Band b where b.bandName = :selectedBand", Band.class);
 		//Substitute parameter with	actual data	from the toDelete item
 		typedQuery.setParameter("selectedBand", toDelete.getBandName());
+		
+		// Testing to see if selecting by id was optimal
+//		TypedQuery<Band>typedQuery = em.createQuery(
+//				"select b from Band b where b.bandId = :selectedBand", Band.class);
+//		//Substitute parameter with	actual data	from the toDelete item
+//		typedQuery.setParameter("selectedBand", toDelete.getBandId());
+		
 		//we only want one result
 		typedQuery.setMaxResults(1);
 		//get the result and save it into a	new	list item

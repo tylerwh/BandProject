@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Band;
+
 /**
  * Servlet implementation class BandNavigationServlet
  */
@@ -46,6 +48,15 @@ public class BandNavigationServlet extends HttpServlet {
 			
 			
 		} else if (process.equals("delete")) {
+			try {
+				Integer tempId = Integer.parseInt(request.getParameter("id"));
+				Band bandToDelete = bh.searchForBandByID(tempId);
+				bh.deleteBand(bandToDelete);
+			} catch (NumberFormatException e) {
+				System.out.println("Forgot to click a button");
+			} finally {
+				getServletContext().getRequestDispatcher("/viewAllBandsServlet").forward(request, response);
+			}
 			
 		} else if (process.equals("add")) {
 			getServletContext().getRequestDispatcher("/index.html").forward(request, response);
