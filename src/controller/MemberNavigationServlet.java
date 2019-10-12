@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Album;
+import model.BandMembers;
+
 /**
  * Servlet implementation class MemberNavigationServlet
  */
@@ -46,6 +49,15 @@ public class MemberNavigationServlet extends HttpServlet {
 			
 			
 		} else if (process.equals("delete")) {
+			try {
+				Integer tempId = Integer.parseInt(request.getParameter("id"));
+				BandMembers memberToDelete = bmh.searchForBandByID(tempId);
+				bmh.deleteBandMember(memberToDelete);
+			} catch (NumberFormatException e) {
+				System.out.println("Forgot to click a button");
+			} finally {
+				getServletContext().getRequestDispatcher("/viewAllBandMembersServlet").forward(request, response);
+			}
 			
 		} else if (process.equals("add")) {
 			getServletContext().getRequestDispatcher("/index.html").forward(request, response);

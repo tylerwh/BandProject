@@ -63,10 +63,9 @@ public class BandMembersHelper {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		TypedQuery<BandMembers>typedQuery = em.createQuery(
-				"select li from ListItem li	where li.title = "
-				+ ":selectedTitle and li.author = :selectedAuthor", BandMembers.class);
+				"select bm from BandMembers bm	where bm.memberName = :selectedMember", BandMembers.class);
 		//Substitute parameter with	actual data	from the toDelete item
-		typedQuery.setParameter("selectedBand", toDelete.getMemberName());
+		typedQuery.setParameter("selectedMember", toDelete.getMemberName());
 		//we only want one result
 		typedQuery.setMaxResults(1);
 		//get the result and save it into a	new	list item
