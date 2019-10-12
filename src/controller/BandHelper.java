@@ -7,7 +7,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import model.Album;
 import model.Band;
+import model.BandMembers;
 
 public class BandHelper {
 
@@ -82,23 +84,42 @@ public class BandHelper {
 	public void deleteBand(Band toDelete) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<Band>typedQuery = em.createQuery(
+		
+//		System.out.println("Here is the toDelete object info: " + toDelete.getBandId() + " " + toDelete.getBandName());
+//		
+//		// Album start ->
+//		// Set up Album object
+//		Album a = new Album();
+//		a.setAlbumId(toDelete.getBandId());
+//		//Query DB
+//		TypedQuery<Album>typedAlbumQuery = em.createQuery("select a from Album a where a.bandId = :selectedAlbum", Album.class);
+//		typedAlbumQuery.setParameter("selectedAlbum", Integer.toString(a.getAlbumId()));
+//		typedAlbumQuery.setMaxResults(1);
+//		Album albumResult = typedAlbumQuery.getSingleResult();
+//		em.remove(albumResult);
+//		// <- Album end
+//		
+//		// BandMember start ->
+//		TypedQuery<BandMembers>typedMemberQuery = em.createQuery("select bm from BandMembers bm where bm.bandId = :selectedMember", BandMembers.class);
+//		typedMemberQuery.setParameter("selectedMember", Integer.toString(toDelete.getBandId()));
+//		typedMemberQuery.setMaxResults(1);
+//		BandMembers memberResult = typedMemberQuery.getSingleResult();
+//		em.remove(memberResult);
+//		// <- BandMember end
+		
+		// Band start ->
+		TypedQuery<Band>typedBandQuery = em.createQuery(
 				"select b from Band b where b.bandName = :selectedBand", Band.class);
 		//Substitute parameter with	actual data	from the toDelete item
-		typedQuery.setParameter("selectedBand", toDelete.getBandName());
-		
-		// Testing to see if selecting by id was optimal
-//		TypedQuery<Band>typedQuery = em.createQuery(
-//				"select b from Band b where b.bandId = :selectedBand", Band.class);
-//		//Substitute parameter with	actual data	from the toDelete item
-//		typedQuery.setParameter("selectedBand", toDelete.getBandId());
-		
+		typedBandQuery.setParameter("selectedBand", toDelete.getBandName());
 		//we only want one result
-		typedQuery.setMaxResults(1);
+		typedBandQuery.setMaxResults(1);
 		//get the result and save it into a	new	list item
-		Band result	= typedQuery.getSingleResult();
+		Band result	= typedBandQuery.getSingleResult();
 		//remove it
 		em.remove(result);
+		// <- Band End
+		
 		em.getTransaction().commit();
 		em.close();
 	}
