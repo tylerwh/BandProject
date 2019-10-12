@@ -14,6 +14,7 @@
 		<tr>
 		 <td><input type="radio" name="id" value="${currentAlbum.albumId}"></td>
 		 <td>${currentAlbum.albumName}</td>
+		 <td>${currentAlbum.releaseDate}</td>
 		 </tr>
 		</c:forEach>
 	</table>
