@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Album;
+import model.Band;
 import model.BandMembers;
 
 /**
@@ -46,7 +47,15 @@ public class MemberNavigationServlet extends HttpServlet {
 		if (process == null) {
 			getServletContext().getRequestDispatcher("/viewAllBandMembersServlet").forward(request, response);
 		} else if (process.equals("edit")) {
-			
+			try {
+				Integer tempId = Integer.parseInt(request.getParameter("id"));
+				BandMembers memberToEdit = bmh.searchForBandByID(tempId);
+				request.setAttribute("memberToEdit", memberToEdit);
+			} catch (NumberFormatException e) {
+				System.out.println("Member not selected");
+			} finally {
+				getServletContext().getRequestDispatcher("/edit-member.jsp").forward(request, response);
+			}
 			
 		} else if (process.equals("delete")) {
 			try {
