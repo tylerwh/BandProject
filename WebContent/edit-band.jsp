@@ -8,9 +8,9 @@
 <title>Edit band name</title>
 </head>
 <body>
-<form action = "editBandServlet" method="post">
+<form action = "EditBandServlet" method="post">
 		Band name: <input type ="text" name = "bandName" value="${bandToEdit.bandName}">
-		<input type = "hidden" name = "id" value="${bandToEdit.id}">
+		<input type = "hidden" name = "id" value="${bandToEdit.bandId}">
 		<input type = "submit" value="Save Edited Band">
 	</form>
 </body>

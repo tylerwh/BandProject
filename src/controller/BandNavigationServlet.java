@@ -45,6 +45,15 @@ public class BandNavigationServlet extends HttpServlet {
 		if (process == null) {
 			getServletContext().getRequestDispatcher("/viewAllBandsServlet").forward(request, response);
 		} else if (process.equals("edit")) {
+			try {
+				Integer tempId = Integer.parseInt(request.getParameter("id"));
+				Band bandToEdit = bh.searchForBandByID(tempId);
+				request.setAttribute("bandToEdit", bandToEdit);
+			} catch (NumberFormatException e) {
+				System.out.println("Band not selected");
+			} finally {
+				getServletContext().getRequestDispatcher("/edit-band.jsp").forward(request, response);
+			}
 			
 			
 		} else if (process.equals("delete")) {
