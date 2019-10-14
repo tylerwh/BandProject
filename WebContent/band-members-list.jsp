@@ -22,5 +22,8 @@
 		<input type = "submit" value = "delete" name="doThisToMember">
 		<input type="submit" value = "add" name = "doThisToMember">
 	</form>
+	<a href="index.html">Go Back!</a>
+	<a href = "viewAllBandsServlet">View all bands</a>
+	<a href = "viewAllAlbumsServlet">View all albums</a><br />
 </body>
 </html>
