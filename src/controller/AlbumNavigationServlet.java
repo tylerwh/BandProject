@@ -46,7 +46,15 @@ public class AlbumNavigationServlet extends HttpServlet {
 		if (process == null) {
 			getServletContext().getRequestDispatcher("/viewAllAlbumsServlet").forward(request, response);
 		} else if (process.equals("edit")) {
-			
+			try {
+				Integer tempId = Integer.parseInt(request.getParameter("id"));
+				Album albumToEdit = ah.searchForAlbumByID(tempId);
+				request.setAttribute("albumToEdit", albumToEdit);
+			} catch (NumberFormatException e) {
+				System.out.println("Album not selected");
+			} finally {
+				getServletContext().getRequestDispatcher("/edit-album.jsp").forward(request, response);
+			}
 			
 		} else if (process.equals("delete")) {
 			try {
